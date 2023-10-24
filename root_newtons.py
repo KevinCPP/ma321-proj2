@@ -77,6 +77,8 @@ class NewtonsMethod:
         
         result1 = self.root_newton(function1, init_guess, tol, max_iter)
         result2 = self.root_newton(function2, init_guess, tol, max_iter)
+
+        # newton's method will fail on function 3
         result3 = ""
         try:
             result3 = self.root_newton(function3, init_guess, tol, max_iter)
@@ -86,9 +88,9 @@ class NewtonsMethod:
         if log:
             print (
                 f"""{self.name} test:
-                e^x - sin(x)  = {result1}
-                (x - 1)^3     = {result2}
-                (x - 1)^(1/3) = {result3}
+                \r    e^x - sin(x)  = {result1}
+                \r    (x - 1)^3     = {result2}
+                \r    (x - 1)^(1/3) = {result3}
                 """
             )
         

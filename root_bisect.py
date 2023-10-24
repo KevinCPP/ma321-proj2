@@ -26,29 +26,35 @@ class BisectionMethod:
 
         Conditions: a < b, either f(a) < 0 and f(b) > 0 or f(a) > 0 and f(b) < 0
         """
-
+        
+        # functions for internal use
         def approx_equal(input1, input2, tol):
             return abs(input1 - input2) < tol 
 
         def signs_equal(input1, input2):
             return (input1 * input2) >= 0
-
-        N = 1
-        while N <= max_iterations:
+        
+        # iterate for up to max_iterations to attempt to converge on a solution
+        for N in range(max_iterations):
+            # select the centerpoint between [a, b]
             c = (endpoint_a + endpoint_b) / 2
+            # find function value at endpoints and center point
             value_a = mathematical_function(endpoint_a)
             value_b = mathematical_function(endpoint_b)
             value_c = mathematical_function(c)
-
+            
+            # test if the center point is the correct answer, or if [a, b] is converging to c as a
+            # solution. Return the result if this is the case
             if approx_equal(value_c, 0, tolerance) or (((endpoint_b - endpoint_a)/2) < tolerance):
                 return c
-
-            N += 1
+            
+            # update the endpoints and continue to the next iteration
             if signs_equal(value_a, value_c):
                 endpoint_a = c
             else:
                 endpoint_b = c
-                
+        
+        # if no solution was found, raise an error indicating such
         raise RuntimeError("Bisection method failed.")
 
     def run_test(self, log=True):
@@ -75,9 +81,9 @@ class BisectionMethod:
         if log:
             print (
                 f"""{self.name} test:
-                e^x - sin(x)  = {result1}
-                (x - 1)^3     = {result2}
-                (x - 1)^(1/3) = {result3}
+                \r    e^x - sin(x)  = {result1}
+                \r    (x - 1)^3     = {result2}
+                \r    (x - 1)^(1/3) = {result3}
                 """
             )
         
