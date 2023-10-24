@@ -1,7 +1,7 @@
-from root_bisect import BisectionMethod
-from root_newtons import NewtonsMethod
+from roots.root_bisect import BisectionMethod
+from roots.root_newtons import NewtonsMethod
 
-if __name__ == "__main__":
+def demo():
     # initialize objects for each method
     bisection = BisectionMethod()
     newtons   = NewtonsMethod()
@@ -9,4 +9,7 @@ if __name__ == "__main__":
     # run built in tests
     bisection.run_test()
     newtons.run_test()
+
+if __name__ == "__main__":
+    demo()
 
