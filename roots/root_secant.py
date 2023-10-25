@@ -68,7 +68,14 @@ class SecantMethod:
         max_iter = 1000000
         result1 = self.root_secant(function1, min_guess, max_guess, tol, max_iter)
         result2 = self.root_secant(function2, min_guess, max_guess, tol, max_iter)
-        result3 = self.root_secant(function3, 0.5, max_guess, tol, max_iter)
+        result3 = ""
+        
+        # Secant method will fail unless given the perfect initial guesses, so that's what I have done
+        # here (a.k.a why min_guess=0.5). It's in a try-catch block for this reason as well.
+        try:
+            result3 = self.root_secant(function3, 0.5, max_guess, tol, max_iter)
+        except RuntimeError:
+            result3 = "n/a"
 
         # print results if enabled
         if log:
