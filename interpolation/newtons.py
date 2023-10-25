@@ -1,5 +1,5 @@
 '''
-JAckson Simpson, Kevin Cosby, William Bentley, Sarah Weber
+Jackson Simpson, Kevin Cosby, William Bentley, Sarah Weber
 Purpose: Use nested multiplication to evaluate the polynomial in Newton’s form.
 '''
 
@@ -7,8 +7,9 @@ import numpy as np
 import math
 
 class NewtonsInterpolation:
-    def __init__(self):
+    def __init__(self, divided_diff_func):
         self.name = "Newton's Interpolation"
+        self.dd_func = divided_diff_func
 
     def poly_eval_newton(self, x, coeff_nt, x_data):
         """
@@ -40,31 +41,32 @@ class NewtonsInterpolation:
         else:
             raise ValueError("x must be either a float or a list of floats.")
     
+#    def divided_differences(self, x_data, y_data):
+#        """
+#        Calculate the coefficients for Newton's polynomial using divided differences.
+#
+#        Parameters:
+#        - x_data: list of floats (interpolation nodes)
+#        - y_data: list of floats (function values at interpolation nodes)
+#
+#        Returns:
+#        - list of floats (coefficients for Newton's polynomial)
+#        """
+#        n = len(y_data)
+#        coeff = [0.0] * n
+#
+#        # Initialize the diagonal of the divided difference table with y_data
+#        for i in range(n):
+#            coeff[i] = y_data[i]
+#
+#        # Build the divided difference table
+#        for j in range(1, n):
+#            for i in range(n-1, j-1, -1):
+#                coeff[i] = (coeff[i] - coeff[i-1]) / (x_data[i] - x_data[i-j])
+#
+#        return coeff
     def divided_differences(self, x_data, y_data):
-        """
-        Calculate the coefficients for Newton's polynomial using divided differences.
-
-        Parameters:
-        - x_data: list of floats (interpolation nodes)
-        - y_data: list of floats (function values at interpolation nodes)
-
-        Returns:
-        - list of floats (coefficients for Newton's polynomial)
-        """
-        n = len(y_data)
-        coeff = [0.0] * n
-
-        # Initialize the diagonal of the divided difference table with y_data
-        for i in range(n):
-            coeff[i] = y_data[i]
-
-        # Build the divided difference table
-        for j in range(1, n):
-            for i in range(n-1, j-1, -1):
-                coeff[i] = (coeff[i] - coeff[i-1]) / (x_data[i] - x_data[i-j])
-
-        return coeff
-
+        return self.dd_func(x_data, y_data)
 
     def run_test(self, log=True):
         # e^(x) - sin(x)
