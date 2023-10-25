@@ -81,6 +81,8 @@ class NewtonsMethod:
         # newton's method will fail on function 3
         result3 = ""
         try:
+            # temporarily added
+            init_guess = 1.0
             result3 = self.root_newton(function3, init_guess, tol, max_iter)
         except ValueError:
             result3 = "n/a"
